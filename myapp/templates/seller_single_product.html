@@ -1,0 +1,72 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content%}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+  </head>
+  <body>
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="margin-top: -20px;margin-bottom: -30px;">
+                    <div class="product-bit-title text-center">
+                        <h2>Product Details</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                
+                    <div class="product-content-right">
+                        <div class="product-breadcroumb">
+                            <a href="{% url 'seller_index' %}">Home</a>
+                            <a href="">{{product.product_company}}</a>
+                            <a href="">{{product.product_model}}</a>
+                        </div>
+                                                             
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="product-images">
+                                    <div class="product-main-img">
+                                        <img src="{{product.product_image.url}}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <h2><a href="">{{product.product_company}}  {{product.product_model}}</a></h2>
+                                <div class="product-sidebar-price">
+                                <ins>{{product.product_price}}</ins>
+                                </div>      
+                                <br><br>
+                                        <a href="{% url 'seller_edit_product' pk=product.pk %}"><button class="add_to_cart_button" type="submit">EDIT</button></a>
+                                        <a href="{% url 'seller_delete_product' pk=product.pk %}"><button class="add_to_cart_button" type="submit">DELETE</button></a>
+                                        <br><br>                                
+                                    <div role="tabpanel">
+                                        <ul class="product-tab" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <h2>Product Description</h2>  
+                                                <p>{{product.product_desc}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

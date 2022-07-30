@@ -1,0 +1,123 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content%}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="margin-top: -30px;margin-bottom: -30px;">
+                    <div class="product-bit-title text-center">
+                        <h2>Sign Up</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="woocommerce">
+                            {% if msg %}
+                                <b style="color:red;">{{msg}}</b>
+                            {% endif %}    
+                            <form enctype="multipart/form-data" action="{% url 'signup' %}" class="checkout" method="post" name="checkout">
+                                {% csrf_token %}
+                                <div id="customer_details" class="col2-set">
+                                    <div class="col-1">
+                                        <div class="woocommerce-billing-fields">
+                                            <h3>Sign Up</h3>
+                                            <p>
+                                                <label class="" for="billing_first_name">Usertype<abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="radio" name="usertype" value="user" id="billing_first_name"class="">User
+                                                &nbsp; &nbsp;
+                                                <input type="radio"name="usertype" value="seller" id="billing_first_name"class="">Seller
+
+                                            </p>
+                                            <p>
+                                                <label class="" for="billing_first_name">First Name <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="text"placeholder="First Name" name="fname" id="billing_first_name"class="input-text ">
+                                            </p>
+                                            <p>
+                                                <label class="" for="billing_last_name">Last Name <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="text" placeholder="Last Name" name="lname" id="billing_last_name" class="input-text ">
+                                            </p>
+                                            <p>
+                                                <label class="" for="billing_email">Email Address <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="text"placeholder="Email" id="email" name="email" class="input-text ">
+                                                <span id="email_error"></span>
+                                            </p>
+                                            <p>
+                                                <label class="" for="billing_phone">Mobile <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="text" placeholder="mobile" id="billing_phone" name="mobile" class="input-text ">
+                                            </p>
+                                            <p>
+                                                <label class="" for="billing_phone">Profile Picture <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="file"  id="billing_phone" name="profile_pic" class="input-text ">
+                                            </p>
+                                             <p>
+                                                <label class="" for="billing_phone">Address <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <textarea cols="5px" rows="5px" type="text"id="billing_phone" placeholder="Address" name="address" class="input-text "></textarea> 
+                                            </p>
+                                              <p>
+                                                <label class="" for="billing_phone">Password <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="password" placeholder="Password" id="billing_phone" name="password" class="input-text ">
+                                            </p>
+                                             <p>
+                                                <label class="" for="billing_phone">Confirm Password <abbr title="required" class="required">*</abbr>
+                                                </label>
+                                                <input type="password" placeholder="Confirm Password" id="billing_phone" name="cpassword" class="input-text ">
+                                            </p>
+                                             <p>
+                                                <input type="submit"  name="action" value="Sign Up"name="cpassword" class="input-submit ">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>                       
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+          $("#email").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (data.is_taken) {
+                  document.getElementById("email").style.border="5px solid red";
+                  document.getElementById("email_error").innerHTML="This Email ID Already Registered";
+                }else{
+                  document.getElementById("email").style.border="5px solid green";
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+        </script>
+  </body>
+</html>
+{% endblock %}  
